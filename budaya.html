@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budaya & Tradisi - Desa Wonosari</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+    :root {
+      --green-dark: #2e5c2e;
+      --green-medium: #4caf50;
+      --green-light: #6cc96c;
+      --header-height: 80px;
+    }
+
+    /* ==== Struktur Dasar & Background ==== */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    main {
+      flex: 1;
+      z-index: 2;
+      padding-bottom: 40px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(30, 58, 138, 0.55),
+        rgba(6, 95, 70, 0.55)
+      ), url("https://www.transparenttextures.com/patterns/arabesque.png");
+      background-size: 250px;
+      background-repeat: repeat;
+      background-attachment: fixed;
+      opacity: 0.95;
+      z-index: 0;
+    }
+
+    section, header, footer { position: relative; z-index: 2; }
+
+    /* ==== HEADER ==== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 50px;
+      background-color: rgba(247, 253, 248, 0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: var(--header-height);
+      z-index: 50;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Diperkecil sedikit */
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+    }
+
+    nav {
+      display: flex;
+      gap: 12px; /* Diperkecil sedikit */
+    }
+
+    nav a {
+      position: relative;
+      text-decoration: none;
+      color: var(--green-dark);
+      padding: 7px 15px; /* Padding lebih ringkas */
+      border-radius: 20px;
+      border: 2px solid var(--green-dark);
+      font-weight: 600;
+      background-color: white;
+      transition: all 0.3s ease;
+      font-size: 0.9rem; /* Ukuran font lebih kecil */
+    }
+
+    nav a.active {
+      background-color: var(--green-medium);
+      color: white;
+      border-color: var(--green-medium);
+      transform: scale(1.05);
+    }
+    
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e7540 100%);
+      color: white;
+      text-align: center;
+      padding-top: calc(var(--header-height) + 40px); /* Sesuaikan dengan tinggi header */
+      padding-bottom: 30px;
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #e0e7ff;
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* CARD KHUSUS */
+    .card-tradisi {
+      border-bottom: 10px solid #facc15; /* Border lebih tipis */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-tradisi:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* CARD IMAGE */
+    .card-tradisi img {
+        height: 300px; /* Tinggi tetap untuk desktop */
+        object-fit: cover;
+    }
+
+
+    /* ==== FOOTER ==== */
+    footer {
+      background: linear-gradient(to right, #1e3a8a, #065f46);
+      color: white;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 14px;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 17px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-container .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .footer-container a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .footer-container a:hover {
+      color: #a7f3d0;
+      transform: translateY(-3px);
+    }
+
+    .divider {
+      width: 80%;
+      max-width: 900px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.25);
+      margin: 10px auto;
+    }
+    
+    .text-green-400 {
+        color: #4ade80; /* Hijau lembut */
+    }
+
+
+    /* ======================================= */
+    /* ====== MEDIA QUERIES UNTUK RESPONSIVE ====== */
+    /* ======================================= */
+
+    /* --- LAYAR TABLET (<= 1024px) --- */
+    @media (max-width: 1024px) {
+        header {
+            padding: 10px 20px;
+            height: 70px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav a {
+            padding: 5px 10px;
+            font-size: 0.85rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+        }
+
+        /* CARD: Atur ulang untuk tablet */
+        .card-tradisi {
+            padding: 20px;
+        }
+        .card-tradisi h2 {
+            font-size: 2rem;
+        }
+        .card-tradisi h3 {
+            font-size: 1.5rem;
+        }
+        
+        .card-tradisi img {
+            height: 250px;
+        }
+    }
+
+    /* --- LAYAR MOBILE (<= 768px) --- */
+    @media (max-width: 768px) {
+        /* HEADER */
+        header {
+            padding: 10px 10px;
+            height: auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 10px;
+            gap: 5px;
+        }
+        
+        .logo img {
+            height: 35px;
+        }
+
+        nav {
+            width: 100%;
+            justify-content: space-around;
+            gap: 5px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        nav a {
+            font-size: 0.75rem;
+            padding: 5px 8px;
+            flex-shrink: 0;
+        }
+
+        /* HERO */
+        .hero {
+            padding-top: 100px; /* Beri ruang lebih jika header wrap */
+        }
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+        .hero p {
+            font-size: 0.85rem;
+        }
+        
+        /* CARD: Ubah menjadi stack/kolom */
+        .card-tradisi {
+            padding: 15px;
+        }
+
+        .card-tradisi .grid {
+            grid-template-columns: 1fr; /* 1 kolom */
+        }
+
+        .card-tradisi h2 {
+            font-size: 1.75rem;
+            text-align: center;
+        }
+        
+        .card-tradisi h3 {
+            font-size: 1.3rem;
+            margin-top: 15px;
+        }
+
+        .card-tradisi ul {
+            font-size: 0.95rem;
+        }
+
+        .card-tradisi img {
+            height: auto;
+            max-height: 250px;
+            margin-top: 15px;
+        }
+    }
+    
+    /* Perbaikan Khusus Grid Card */
+    @media (min-width: 768px) {
+        .card-tradisi:nth-child(even) .grid > div:first-child {
+            order: 2; /* Pindahkan teks ke kanan untuk card genap */
+        }
+        .card-tradisi:nth-child(even) .grid > div:last-child {
+            order: 1; /* Pindahkan gambar ke kiri untuk card genap */
+        }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logounnes.png" alt="UNNES">
+    <img src="logokkn.png" alt="KKN">
+    <img src="logokemdikbud.png" alt="Kemendikbud">
+    <img src="loggowonosari.png" alt="Wonosari">
+  </div>
+  <nav>
+    <a href="index.html">BERANDA</a>
+    <a href="profil.html">PROFIL</a>
+    <a href="produk.html">PRODUK</a>
+    <a href="infografis.html">INFOGRAFIS</a>
+    <a href="budaya.html" class="active">BUDAYA</a>
+  </nav>
+</header>
+
+
+  <section class="hero">
+    <h1>Budaya & Tradisi Desa Wonosari</h1>
+    <p>Pelestarian warisan leluhur dan kegiatan seni yang menjadi identitas unik masyarakat Wonosari.</p>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 mt-8">
+
+<section class="bg-white p-6 md:p-10 rounded-3xl shadow-2xl card-tradisi">
+  <h2 class="text-3xl font-bold text-yellow-700 mb-6 flex items-center justify-center md:justify-start">
+    <i data-lucide="handshake" class="w-7 h-7 mr-3"></i> Kesenian Barongan
+  </h2>
+  <div class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3">Warisan Budaya dan Identitas Wonosari</h3>
+      <p class="text-gray-600 mb-4 text-justify">
+        Barongan adalah salah satu kesenian rakyat yang masih hidup di tengah masyarakat Desa Wonosari. 
+        Seni ini tidak hanya menjadi hiburan, tetapi juga sarana spiritual dan simbol perjuangan antara kebaikan dan kejahatan. 
+        Barongan dimainkan dengan penuh semangat dan diiringi musik gamelan serta tabuhan kendang yang menggugah semangat penonton.
+      </p>
+      <ul class="space-y-2 text-gray-700 list-disc list-inside">
+        <li><strong>Waktu Pertunjukan:</strong> Ditampilkan pada acara desa, perayaan hari besar, atau kegiatan adat seperti bersih desa.</li>
+        <li><strong>Makna Budaya:</strong> Melambangkan semangat masyarakat dalam menjaga keseimbangan hidup serta menghormati leluhur.</li>
+        <li><strong>Pelaku Seni:</strong> Diperankan oleh kelompok seni lokal yang terdiri dari pemuda dan tokoh masyarakat setempat.</li>
+      </ul>
+    </div>
+    <div class="flex justify-center">
+      <img src="barongan.png" alt="Kesenian Barongan" class="rounded-2xl shadow-lg w-full max-w-sm">
+    </div>
+  </div>
+</section>
+
+<section class="bg-white p-6 md:p-10 rounded-3xl shadow-2xl card-tradisi">
+  <h2 class="text-3xl font-bold text-yellow-700 mb-6 flex items-center justify-center md:justify-start">
+    <i data-lucide="mic" class="w-7 h-7 mr-3"></i> Kesenian Hadroh
+  </h2>
+  <div class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3">Seni Musik Religi yang Menyatukan Masyarakat</h3>
+      <p class="text-gray-600 mb-4 text-justify">
+        Kesenian Hadroh merupakan bentuk ekspresi keagamaan masyarakat Wonosari yang sarat makna spiritual dan sosial. 
+        Dengan irama rebana yang dinamis dan lantunan shalawat yang indah, kesenian ini menjadi wadah dakwah Islam serta mempererat kebersamaan antarwarga.
+      </p>
+      <ul class="space-y-2 text-gray-700 list-disc list-inside">
+        <li><strong>Waktu Penampilan:</strong> Biasanya ditampilkan pada acara keagamaan, pernikahan, atau kegiatan sosial desa.</li>
+        <li><strong>Makna Religius:</strong> Mengajarkan cinta kepada Nabi Muhammad SAW dan memperkuat nilai spiritual masyarakat.</li>
+        <li><strong>Pelaku Seni:</strong> Diperankan oleh kelompok hadroh lokal yang terdiri dari pemuda dan ibu-ibu majelis taklim.</li>
+        <li><strong>Nilai Sosial:</strong> Menumbuhkan rasa kebersamaan, kekompakan, dan semangat gotong royong.</li>
+      </ul>
+    </div>
+    <div class="flex justify-center">
+      <img src="hadroh.jpg" alt="Foto Kesenian Hadroh" class="rounded-xl shadow-lg w-full max-w-sm object-cover">
+    </div>
+  </div>
+</section>
+
+<section class="bg-white p-6 md:p-10 rounded-3xl shadow-2xl card-tradisi">
+  <h2 class="text-3xl font-bold text-yellow-700 mb-6 flex items-center justify-center md:justify-start">
+    <i data-lucide="baby" class="w-7 h-7 mr-3"></i> Prosesi Tradisional Tedak Siten
+  </h2>
+  <div class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3">Makna Filosofis dan Warisan Adat Jawa</h3>
+      <p class="text-gray-600 mb-4 text-justify">
+        Tedak Siten adalah upacara adat Jawa yang dilaksanakan ketika anak pertama kali belajar berjalan. 
+        Tradisi ini menggambarkan doa dan harapan agar anak kelak tumbuh menjadi pribadi yang kuat, berakhlak baik, serta membawa kebahagiaan bagi keluarga.
+      </p>
+      <ul class="space-y-2 text-gray-700 list-disc list-inside">
+        <li><strong>Waktu Pelaksanaan:</strong> Saat anak berusia sekitar tujuh atau delapan bulan dan mulai belajar berjalan.</li>
+        <li><strong>Makna Tradisi:</strong> Melambangkan langkah pertama manusia dalam menapaki kehidupan di dunia.</li>
+        <li><strong>Rangkaian Upacara:</strong> Anak berjalan di atas tujuh jenis tanah atau bahan alami yang melambangkan harapan hidup.</li>
+        <li><strong>Nilai Budaya:</strong> Menumbuhkan rasa syukur, kebersamaan keluarga, dan pelestarian adat Jawa di Wonosari.</li>
+      </ul>
+    </div>
+    <div class="flex justify-center">
+      <img src="tedak sinten.jpg" alt="Prosesi Tedak Siten" class="rounded-xl shadow-lg w-full max-w-xs object-cover">
+    </div>
+  </div>
+</section>
+
+
+  </main>
+
+<section class="py-6 mt-10">
+  <div class="container mx-auto text-center">
+    <a href="profil.html" 
+      class="inline-block px-6 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-lg hover:bg-green-700 transition-colors">
+      ← Kembali ke PROFIL
+    </a>
+  </div>
+</section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="social-links">
+        <a href="mailto:unnesgiatwonosari@gmail.com" target="_blank">
+          <i data-lucide="mail" class="w-6 h-6"></i> Email
+        </a>
+        <a href="https://www.instagram.com/giat13_wonosari" target="_blank">
+          <i data-lucide="instagram" class="w-6 h-6"></i> Instagram
+        </a>
+        <a href="https://youtube.com/@wonosari_kendal" target="_blank">
+          <i data-lucide="youtube" class="w-6 h-6"></i> YouTube
+        </a>
+      </div>
+      <div class="divider"></div>
+      <p>© 2025 <span class="font-semibold">Profil Desa Wonosari</span>. Dibuat dengan semangat <span class="text-green-400">Giat 13 Unnes</span>.</p>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

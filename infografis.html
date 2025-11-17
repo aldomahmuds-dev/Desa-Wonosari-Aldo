@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infografis - Data Kependudukan Desa Wonosari</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+    /* === VARIASI WARNA === */
+    :root {
+      --green-dark: #2e5c2e;
+      --green-medium: #4caf50;
+      --green-light: #6cc96c;
+      --bg-light: #f7fdf8;
+      --header-height: 80px;
+      --navy: #1e3a8a;
+    }
+
+    /* === STRUKTUR UTAMA === */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    main {
+      flex: 1; /* Dorong footer ke bawah */
+      padding-bottom: 40px;
+    }
+    
+    .text-navy { color: var(--navy); }
+
+    /* === HEADER === */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 50px;
+      background-color: rgba(247, 253, 248, 0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: var(--header-height);
+      z-index: 50;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      background: transparent;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      position: relative;
+      text-decoration: none;
+      color: var(--green-dark);
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 2px solid var(--green-dark);
+      font-weight: 600;
+      background-color: white;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    nav a:hover {
+      background-color: var(--green-light);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    nav a.active {
+      background-color: var(--green-medium);
+      color: white;
+      border-color: var(--green-medium);
+      transform: scale(1.1);
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e7540 100%);
+      color: white;
+      text-align: center;
+      padding-top: calc(var(--header-height) + 40px); 
+      padding-bottom: 48px;
+    }
+
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #e0e7ff;
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* === KARTU DATA === */
+    .data-card {
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.05), 0 4px 6px -2px rgba(30, 58, 138, 0.05);
+    }
+
+    .data-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 20px -5px rgba(30, 58, 138, 0.1);
+    }
+
+    .chart-bar-bg { background-color: #d1fae5; }
+    .chart-bar-fill-blue { background-color: #3b82f6; }
+    .chart-bar-fill-red { background-color: #ef4444; }
+
+    /* === TABEL RESPONSIVITAS === */
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive th, .table-responsive td {
+        white-space: nowrap; /* Cegah teks di sel tabel wrap */
+    }
+
+    /* === FOOTER === */
+    footer {
+        background: linear-gradient(to right, #1e3a8a, #065f46);
+        color: white;
+        text-align: center;
+        padding: 24px 20px;
+        font-size: 14px;
+        width: 100%;
+        margin-top: auto;
+        position: relative;
+    }
+
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 17px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footer-container .social-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+        flex-wrap: wrap;
+    }
+
+    .footer-container a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+        transition: color 0.3s, transform 0.3s;
+    }
+
+    .footer-container a:hover {
+        color: #a7f3d0;
+        transform: translateY(-3px);
+    }
+
+    .divider {
+        width: 80%;
+        max-width: 900px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.25);
+        margin: 10px auto;
+    }
+    
+    /* ======================================= */
+    /* ====== MEDIA QUERIES UNTUK RESPONSIVE ====== */
+    /* ======================================= */
+
+    /* --- LAYAR TABLET (<= 1024px) --- */
+    @media (max-width: 1024px) {
+        header {
+            padding: 10px 20px;
+            height: 70px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav a {
+            padding: 5px 12px;
+            font-size: 0.85rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+        }
+    }
+
+    /* --- LAYAR MOBILE (<= 768px) --- */
+    @media (max-width: 768px) {
+        /* HEADER (stack) */
+        header {
+            padding: 10px 10px;
+            height: auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 10px;
+            gap: 5px;
+        }
+        
+        .logo img {
+            height: 35px;
+        }
+
+        nav {
+            width: 100%;
+            justify-content: space-around;
+            gap: 5px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        nav a {
+            font-size: 0.75rem;
+            padding: 5px 8px;
+            flex-shrink: 0;
+            border-width: 1px;
+        }
+        
+        /* HERO */
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+        .hero p {
+            font-size: 0.85rem;
+        }
+        
+        /* KARTU RINGKASAN */
+        .data-card {
+            padding: 15px;
+        }
+        .data-card p.text-5xl {
+            font-size: 3rem;
+        }
+        
+        /* TABEL (Horizontal Scroll) */
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Judul Section */
+        main h2 {
+            font-size: 1.8rem;
+        }
+    }
+  </style>
+</head>
+
+<body class="text-gray-800">
+
+  <header>
+    <div class="logo">
+      <img src="logounnes.png" alt="UNNES" />
+      <img src="logokkn.png" alt="KKN" />
+      <img src="logokemdikbud.png" alt="Kemendikbud" />
+      <img src="loggowonosari.png" alt="Wonosari" />
+    </div>
+
+    <nav>
+      <a href="index.html">BERANDA</a>
+      <a href="profil.html">PROFIL</a>
+      <a href="produk.html">PRODUK</a>
+      <a href="infografis.html" class="active">INFOGRAFIS</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Struktur Demografi Desa Wonosari</h1>
+    <p>
+      Data Kependudukan Desa Wonosari berdasarkan hasil olahan statistik administrasi desa terakhir 
+      (Data Penduduk Desa Wonosari Semester 1 Tahun 2025).<br>
+      Disesuaikan dengan data resmi dari 
+      <a href="https://wonosari.kendalkab.go.id/penduduk" target="_blank" 
+          class="underline text-green-200 hover:text-green-100">
+          wonosari.kendalkab.go.id/penduduk
+      </a>.
+    </p>
+  </section>
+
+  <main class="bg-f0f4f8 mt-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-navy mb-6 border-b-2 border-green-600 pb-2 flex items-center">
+          <i data-lucide="bar-chart-3" class="w-7 h-7 mr-3 text-green-600"></i> Ringkasan Utama
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="data-card bg-white rounded-xl p-6 text-center shadow-lg border-t-4 border-green-600">
+            <i data-lucide="users" class="w-7 h-7 mx-auto text-green-600 mb-3"></i>
+            <p class="text-sm uppercase font-semibold text-gray-500">Total Penduduk</p>
+            <p class="text-5xl font-extrabold text-navy mt-1">5.680</p>
+            <p class="text-xs text-gray-400 mt-2">Data Per Akhir 2024 (Placeholder)</p>
+          </div>
+
+          <div class="data-card bg-white rounded-xl p-6 text-center shadow-lg border-t-4 border-blue-600">
+            <i data-lucide="user" class="w-10 h-10 mx-auto text-blue-600 mb-3"></i>
+            <p class="text-sm uppercase font-semibold text-gray-500">Laki-laki</p>
+            <p class="text-5xl font-extrabold text-navy mt-1">2.890</p>
+            <p class="text-sm text-blue-600 mt-2">50.88% dari Total</p>
+          </div>
+
+          <div class="data-card bg-white rounded-xl p-6 text-center shadow-lg border-t-4 border-red-500">
+            <i data-lucide="user" class="w-10 h-10 mx-auto text-red-500 mb-3 transform scale-x-[-1]"></i>
+            <p class="text-sm uppercase font-semibold text-gray-500">Perempuan</p>
+            <p class="text-5xl font-extrabold text-navy mt-1">2.790</p>
+            <p class="text-sm text-red-500 mt-2">49.12% dari Total</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-16 bg-white p-8 rounded-xl shadow-lg">
+        <h2 class="text-3xl font-bold text-navy mb-6 border-b border-gray-200 pb-3 flex items-center">
+          <i data-lucide="graduation-cap" class="w-7 h-7 mr-3 text-green-600"></i> Struktur Pendidikan
+        </h2>
+        
+        <div class="table-responsive">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tingkat Pendidikan</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah Jiwa</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/3">Persentase</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" id="tabel-pendidikan">
+              <tr>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">Tidak/Belum Sekolah</td>
+                <td class="px-6 py-4 text-right text-sm text-gray-700">650</td>
+                <td class="px-6 py-4">
+                  <div class="chart-bar-bg h-2 rounded-full">
+                    <div class="chart-bar-fill-blue h-2 rounded-full" style="width: 11.4%"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">SD / Sederajat</td>
+                <td class="px-6 py-4 text-right text-sm text-gray-700">1.800</td>
+                <td class="px-6 py-4">
+                  <div class="chart-bar-bg h-2 rounded-full">
+                    <div class="chart-bar-fill-blue h-2 rounded-full" style="width: 31.7%"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">SMP / Sederajat</td>
+                <td class="px-6 py-4 text-right text-sm text-gray-700">1.450</td>
+                <td class="px-6 py-4">
+                  <div class="chart-bar-bg h-2 rounded-full">
+                    <div class="chart-bar-fill-blue h-2 rounded-full" style="width: 25.5%"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">SMA / Sederajat</td>
+                <td class="px-6 py-4 text-right text-sm text-gray-700">1.280</td>
+                <td class="px-6 py-4">
+                  <div class="chart-bar-bg h-2 rounded-full">
+                    <div class="chart-bar-fill-blue h-2 rounded-full" style="width: 22.5%"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">Diploma / Sarjana</td>
+                <td class="px-6 py-4 text-right text-sm text-gray-700">500</td>
+                <td class="px-6 py-4">
+                  <div class="chart-bar-bg h-2 rounded-full">
+                    <div class="chart-bar-fill-blue h-2 rounded-full" style="width: 8.8%"></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-gray-500">*Data placeholder. Total: 5.680 Jiwa. Silakan ganti dengan data resmi.</p>
+      </section>
+
+      <section class="bg-white p-8 rounded-xl shadow-lg">
+        <h2 class="text-3xl font-bold text-navy mb-6 border-b border-gray-200 pb-3 flex items-center">
+          <i data-lucide="calendar" class="w-7 h-7 mr-3 text-green-600"></i> Struktur Kelompok Usia
+        </h2>
+        
+        <div class="table-responsive">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelompok Usia</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Laki-laki</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Perempuan</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" id="tabel-usia">
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">0 - 4 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">106</td><td class="px-6 py-4 text-right text-sm text-gray-700">120</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">226</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">5 - 9 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">175</td><td class="px-6 py-4 text-right text-sm text-gray-700">156</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">331</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">10 - 14 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">185</td><td class="px-6 py-4 text-right text-sm text-gray-700">181</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">366</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">15 - 19 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">195</td><td class="px-6 py-4 text-right text-sm text-gray-700">177</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">372</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">20 - 24 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">192</td><td class="px-6 py-4 text-right text-sm text-gray-700">188</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">380</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">25 - 29 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">162</td><td class="px-6 py-4 text-right text-sm text-gray-700">171</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">333</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">30 - 34 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">160</td><td class="px-6 py-4 text-right text-sm text-gray-700">162</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">322</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">35 - 39 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">149</td><td class="px-6 py-4 text-right text-sm text-gray-700">145</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">294</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">40 - 44 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">138</td><td class="px-6 py-4 text-right text-sm text-gray-700">138</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">276</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">45 - 49 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">148</td><td class="px-6 py-4 text-right text-sm text-gray-700">151</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">299</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">50 - 54 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">148</td><td class="px-6 py-4 text-right text-sm text-gray-700">152</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">300</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">55 - 59 Tahun</td><td class="px-6 py-4 text-right text-sm text-gray-700">132</td><td class="px-6 py-4 text-right text-sm text-gray-700">140</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">272</td></tr>
+              <tr><td class="px-6 py-4 text-sm font-medium text-gray-900">60 Tahun ke Atas</td><td class="px-6 py-4 text-right text-sm text-gray-700">195</td><td class="px-6 py-4 text-right text-sm text-gray-700">226</td><td class="px-6 py-4 text-right text-sm font-bold text-navy">421</td></tr>
+              
+              <tr class="bg-gray-100 font-extrabold text-lg">
+                <td class="px-6 py-4 text-navy">Total Keseluruhan</td>
+                <td class="px-6 py-4 text-right text-blue-600">2.035</td>
+                <td class="px-6 py-4 text-right text-red-500">1.967</td>
+                <td class="px-6 py-4 text-right text-green-700">4.002</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-gray-500">
+          *Data Penduduk Desa Wonosari Semester 1 Tahun 2025.<br>
+          Sumber: 
+          <a href="https://dispendukcapil.kendalkab.go.id" target="_blank" class="underline text-green-600 hover:text-green-800">
+            Dispendukcapil Kendal
+          </a> dan 
+          <a href="https://wonosari.kendalkab.go.id/penduduk" target="_blank" class="underline text-blue-600 hover:text-blue-800">
+            wonosari.kendalkab.go.id
+          </a>.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-gradient-to-r from-blue-900 to-green-700 text-white py-5 mt-8 relative">
+    <div class="footer-container text-center flex flex-col items-center justify-center">
+
+      <div class="social-links">
+        <a href="unnesgiatwonosari@gmail.com" target="_blank"
+            class="hover:text-green-300 transform hover:scale-110 transition duration-300 ease-in-out flex items-center gap-2">
+          <i data-lucide="mail" class="w-6 h-6"></i>
+          <span class="text-sm font-medium">Email</span>
+        </a>
+
+        <a href="https://www.instagram.com/giat13_wonosari?igsh=eHN4eThydThpa2U3" target="_blank"
+            class="hover:text-pink-400 transform hover:scale-110 transition duration-300 ease-in-out flex items-center gap-2">
+          <i data-lucide="instagram" class="w-6 h-6"></i>
+          <span class="text-sm font-medium">Instagram</span>
+        </a>
+
+        <a href="https://youtube.com/@wonosari_kendal?si=KpHO3topHtEARjX6" target="_blank"
+            class="hover:text-red-400 transform hover:scale-110 transition duration-300 ease-in-out flex items-center gap-2">
+          <i data-lucide="youtube" class="w-6 h-6"></i>
+          <span class="text-sm font-medium">YouTube</span>
+        </a>
+      </div>
+
+      <div class="divider border-t border-white/30 w-4/5 my-4"></div>
+
+      <p class="text-sm text-white/90">
+        © 2025 <span class="font-semibold">Profil Desa Wonosari</span>. 
+        Dibuat dengan semangat <span class="text-green-300 font-semibold">Giat 13 Unnes</span>.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>

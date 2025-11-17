@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Desa Wonosari</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ============ DASAR ============ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #1f3d1f;
+      background-color: #f7fdf8;
+      overflow-x: hidden;
+      display: flex; /* Untuk menempatkan footer di bawah */
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    :root {
+      --green-dark: #2e5c2e;
+      --green-medium: #4baf50;
+      --green-light: #6cc96c;
+      --bg-light: #f7fdf8;
+      --header-height: 80px;
+    }
+    
+    main {
+        flex-grow: 1;
+    }
+
+    /* ============ HEADER ============ */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 50px;
+      background-color: rgba(247, 253, 248, 0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: var(--header-height);
+      z-index: 100;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+  /* === LOGO === */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Diperkecil sedikit */
+}
+
+/* Logo transparan dan rapi */
+.logo img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Efek halus ketika diarahkan kursor */
+.logo img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+}
+
+
+    nav {
+      display: flex;
+      gap: 12px;
+    }
+
+   nav a {
+      position: relative;
+      text-decoration: none;
+      color: var(--green-dark);
+      padding: 8px 15px; /* Disesuaikan agar muat */
+      border-radius: 20px;
+      border: 2px solid var(--green-dark);
+      font-weight: 600;
+      background-color: white;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      font-size: 0.95rem; /* Disesuaikan agar muat */
+    }
+
+/* Efek hover dan klik */
+nav a:hover {
+  background-color: var(--green-light);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Saat tombol aktif */
+nav a.active {
+  background-color: var(--green-medium);
+  color: white;
+  border-color: var(--green-medium);
+  transform: scale(1.1);
+}
+
+/* Garis bawah animasi */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 3px;
+  background-color: var(--green-medium);
+  border-radius: 3px;
+  transition: transform 0.3s ease;
+}
+
+nav a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+nav a.active::after {
+  transform: translateX(-50%) scaleX(1);
+  background-color: white;
+}
+
+    /* ===== SECTION DASAR (HERO) ===== */
+    #profil {
+        padding-top: calc(var(--header-height) + 40px);
+    }
+    .bg-section {
+      position:relative;
+      color:white;
+      padding:120px 20px;
+      min-height:90vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      text-shadow:0 2px 6px rgba(0,0,0,0.6);
+    }
+    .bg-section h1, .bg-section h2 {
+      font-size:70px; /* Ditingkatkan untuk Hero */
+      font-family:"Playfair Display",serif;
+      margin-bottom:10px;
+    }
+    .bg-section p {
+      max-width:800px;
+      font-size:1.1rem;
+      line-height:1.7;
+    }
+
+    /* ===== ZIGZAG SECTIONS ===== */
+    .zigzag {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:60px; /* Jarak default lebih rapat */
+      flex-wrap:wrap;
+      min-height:60vh; /* Perkecil min-height */
+      padding:80px 10%; /* Perkecil padding atas/bawah */
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      color:white;
+      text-shadow:0 2px 6px rgba(0,0,0,0.6);
+    }
+    .zigzag:nth-child(even){
+      flex-direction:row-reverse;
+    }
+    .zigzag img {
+      width:40%; /* Perkecil lebar gambar */
+      max-width: 500px;
+      border-radius:20px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.25);
+      height:350px; /* Perkecil tinggi gambar */
+      object-fit:cover;
+    }
+    .zigzag .text {width:55%;}
+    .zigzag h2 {
+      font-family:"Playfair Display",serif;
+      font-size:38px;
+      font-weight:800;
+      margin-bottom:20px;
+      color:white;
+      text-shadow: none; /* Hilangkan text shadow pada h2 di zigzag */
+    }
+    .zigzag p {font-size:16px;line-height:1.8;text-align:justify;color:white;}
+
+    /* ===== KONDISI UMUM CARD ===== */
+    #kondisi-umum {
+      background: linear-gradient(to right, #ffffff, #f0f0f0);
+      color:#1f3d1f;
+      padding:100px 50px;
+      text-align:center;
+    }
+    #kondisi-umum h2 {
+      font-family:"Playfair Display",serif;
+      font-size:42px;
+      margin-bottom:50px;
+      color:#2e5c2e;
+    }
+    .card-container {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:30px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .card {
+      background:#f9fff9;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 4px solid var(--green-medium);
+    }
+    .card:hover {
+      transform:translateY(-8px);
+      box-shadow:0 15px 30px rgba(0,0,0,0.25);
+    }
+    .card h3 {
+      font-size:24px;
+      margin-bottom:15px;
+      color:#2e5c2e;
+      font-weight:700;
+    }
+    .card p {
+      font-size:15px;
+      line-height:1.6;
+      color:#1f3d1f;
+      text-align:justify;
+    }
+    
+    /* === POTENSI DESA (3 KARTU HORIZONTAL) === */
+    #potensi {
+        padding:100px 50px; 
+        background:linear-gradient(to bottom,#f6fff6,#ffffff); 
+        text-align:center;
+    }
+
+    .potensi-row {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .potensi-card {
+      background: #ffffff;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #1f3d1f;
+      width: 30%;
+      min-width: 250px; /* Minimum lebar kartu */
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      display: flex; /* agar konten terdistribusi */
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .potensi-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+
+    .potensi-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .potensi-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .potensi-card h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      color: #2e5c2e;
+      margin: 20px 0 10px;
+    }
+
+    .potensi-card p {
+      font-size: 15px;
+      padding: 0 20px 30px;
+      line-height: 1.6;
+      color: #1f3d1f;
+      flex-grow: 1; /* Agar tinggi p sama */
+    }
+
+    .text-green-400 {
+        color: #4ade80; /* hijau lembut */
+        font-weight: bold;
+    }
+
+
+    /* ===== FOOTER ===== */
+    footer {
+      background:linear-gradient(to right,#1e3a8a,#065f46);
+      color:white;
+      text-align:center;
+      padding:30px 20px;
+      font-size:14px;
+      width:100%;
+      margin-top: 0;
+    }
+    .social-links{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:10px;}
+    .social-links a{color:white;text-decoration:none;display:flex;align-items:center;gap:6px;font-weight:600;transition:.3s;}
+    .social-links a:hover{color:#a7f3d0;transform:translateY(-3px);}
+
+
+/* ======================================================
+    RESPONSIVE MEDIA QUERIES
+    ====================================================== */
+
+/* ======================= 1. TABLET (<= 1100px) ======================= */
+@media (max-width: 1100px) {
+    /* HEADER */
+    header {
+        padding: 10px 30px;
+        height: 70px;
+    }
+    .logo img {
+        height: 40px;
+    }
+    nav a {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    /* ZIGZAG */
+    .zigzag {
+        gap: 30px;
+        padding: 60px 5%;
+        min-height: auto;
+    }
+    .zigzag img {
+        width: 45%;
+        height: 300px;
+    }
+    .zigzag .text {
+        width: 50%;
+    }
+    .zigzag h2 {
+        font-size: 32px;
+    }
+    .zigzag p {
+        font-size: 15px;
+    }
+    
+    /* KONDISI UMUM */
+    #kondisi-umum {
+        padding: 80px 20px;
+    }
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .card h3 {
+        font-size: 20px;
+    }
+
+    /* POTENSI */
+    .potensi-row {
+        gap: 20px;
+    }
+    .potensi-card {
+        min-width: 45%; /* Dua kartu per baris */
+    }
+}
+
+
+/* ======================= 2. HP BESAR/TABLET KECIL (<= 768px) ======================= */
+@media (max-width: 768px) {
+    
+    /* HEADER (Stack) */
+    header {
+        padding: 10px 10px;
+        height: auto;
+        flex-wrap: wrap;
+        flex-direction: column;   /* <— INI YANG MEMBUAT ATAS–BAWAH */
+        justify-content: center;
+    }
+    .logo {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .logo img {
+        height: 35px;
+    }
+    nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 5px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    nav a {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+        flex-shrink: 0;
+        border-width: 1px;
+    }
+
+    /* HERO */
+    .bg-section h1 {
+        font-size: 42px;
+    }
+    .bg-section p {
+        font-size: 1rem;
+    }
+
+    /* ZIGZAG (Stack Vertical) */
+    .zigzag,
+    .zigzag:nth-child(even) {
+        flex-direction: column;
+        padding: 50px 15px;
+        text-align: center;
+        gap: 20px;
+    }
+    .zigzag img,
+    .zigzag .text {
+        width: 100%;
+        height: auto;
+    }
+    .zigzag img {
+        max-height: 250px;
+    }
+    .zigzag h2 {
+        font-size: 28px;
+        text-align: center;
+    }
+    .zigzag p {
+        text-align: justify;
+    }
+    
+    /* KONDISI UMUM */
+    #kondisi-umum {
+        padding: 60px 15px;
+    }
+    .card-container {
+        grid-template-columns: 1fr; /* Satu kolom */
+    }
+    #kondisi-umum h2 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+    .card {
+        padding: 20px;
+    }
+    
+    /* POTENSI */
+    #potensi {
+        padding: 60px 15px;
+    }
+    #potensi h2 {
+        font-size: 32px;
+        margin-bottom: 30px !important;
+    }
+    .potensi-row {
+        gap: 15px;
+    }
+    .potensi-card {
+        width: 100%;
+        min-width: unset;
+    }
+    .potensi-card img {
+        height: 180px;
+    }
+}
+</style>
+
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="logounnes.png" alt="UNNES">
+      <img src="logokkn.png" alt="KKN">
+      <img src="logokemdikbud.png" alt="Kemendikbud">
+      <img src="loggowonosari.png" alt="Desa Wonosari">
+    </div>
+    <nav>
+      <a href="index.html">BERANDA</a>
+      <a href="#profil" class="active">PROFIL</a>
+      <a href="produk.html">PRODUK</a>
+      <a href="infografis.html">INFOGRAFIS</a>
+
+    </nav>
+  </header>
+  
+  <main>
+    <section id="profil" class="bg-section" data-bg="latar1.png">
+      <h1>Profil Desa Wonosari</h1>
+      <p>Menelusuri sejarah, kehidupan sosial, dan potensi lokal Desa Wonosari di Kecamatan Pegandon, Kabupaten Kendal.</p>
+    </section>
+
+    <section class="zigzag" data-bg="latar2.png">
+      <img src="sejarah desa.png" alt="Sejarah Desa">
+      <div class="text">
+        <h2>Sejarah Singkat</h2>
+        <p>Desa Wonosari dikenal dengan desa yang telah ada sejak jaman kolonial Belanda. Sebelum Tahun 1938, desa ini terbagi menjadi 2 desa, yaitu : Desa Mbelang dan Tanjung, yang mana Desa Mbelang terbagi lagi menjadi 2 dusun, yaitu Dusun Mbelang dan Dusun Mijen, sedangkan Desa Tanjung terbagi menjadi 3 dusun, yaitu Dusun Pidik, Tanjung, dan Tegalsari. Kedua desa tersebut berbatasan dengan daerah Jatilawang. Namun, menjelang masa berakhirnya masa Kolonial Belanda tersebut, telah banyak perubahan dari desa ini, yang mana telah terbagi kedalam 6 dusun, yaitu : Dusun Mijen, Dusun Krajan 1, Dusun Krajan 2, Dusun Tegalsari, Dusun Tanjung, dan Dusun Pidik.</p>
+      </div>
+    </section>
+
+    <section class="zigzag" data-bg="latar3.png">
+      <img src="kondisi sosial.png" alt="Kondisi Sosial Budaya">
+      <div class="text">
+        <h2>Kondisi Sosial Budaya</h2>
+        <p>Mayoritas penduduk Desa Wonosari bekerja di sektor pertanian, perkebunan, dan sebagai buruh bangunan, namun terbatasnya lapangan kerja yang sesuai dengan perkembangan penduduk menjadi tantangan utama. Upaya pembangunan desa perlu difokuskan pada perluasan kesempatan kerja melalui penguatan modal dan fasilitasi usaha ekonomi produktif. Penurunan angka kemiskinan telah menjadikan Wonosari sebagai desa berkembang, meski tetap diperlukan pencarian peluang ekonomi baru. Beragam kegiatan organisasi masyarakat seperti LPM, PKK, Karang Taruna, dan kelompok tani menjadi aset penting dalam penyebaran informasi pembangunan. Prasarana dan sarana desa turut mendukung pembangunan yang diharapkan bersumber dari kemandirian masyarakat, serta mampu mendorong perubahan sosial, ekonomi, dan budaya secara seimbang demi peningkatan kualitas hidup.</p>
+      </div>
+    </section>
+
+    <section class="zigzag" data-bg="latar1.png">
+      <img src="kondisi ekonomi.png" alt="Kondisi Ekonomi">
+      <div class="text">
+        <h2>Kondisi Ekonomi Desa</h2>
+        <p>Desa Wonosari memiliki kekayaan sumber daya alam yang mendukung pengembangan ekonomi dan sosial budaya, terutama di sektor pertanian, perkebunan, dan pariwisata. Mayoritas penduduknya bekerja sebagai petani, pekebun, buruh bangunan, dan buruh harian lepas, sementara sebagian lainnya berprofesi sebagai peternak serta mengembangkan industri kecil seperti pembuatan emping pisang, kacang kletik, usaha panggang ayam/itik, perbengkelan, dan jasa lainnya.</p>
+      </div>
+    </section>
+
+    <section class="zigzag" data-bg="latar2.png">
+      <img src="jalan.png" alt="Infrastruktur Desa">
+      <div class="text">
+        <h2>Kondisi Infrastruktur Desa</h2>
+        <p>Desa Wonosari memiliki beragam prasarana pendukung pembangunan, meliputi sektor kesehatan seperti Posyandu (6 tempat), Poskesdes (1 unit), serta tenaga kesehatan desa dan bidan masing-masing 1 orang. Di bidang pendidikan tersedia TK/PAUD (3 unit), SD Negeri (3 unit), SMP Negeri (1 unit), dan MDA/TPQ (4 unit). Prasarana umum lainnya mencakup 4 masjid, 16 mushola, 1 majelis taklim, serta fasilitas olahraga berupa lapangan sepak bola (1 unit), voli (3 unit), dan futsal (1 unit). Pengelolaan sarana dan prasarana ini menekankan keberlanjutan melalui keterlibatan aktif masyarakat, agar mampu mengambil keputusan pembangunan secara mandiri, adil, dan rasional, serta mengelola potensi sumber daya demi peningkatan kesejahteraan. Pembangunan masyarakat desa sebaiknya berlandaskan pada kemandirian, dengan tujuan agar setiap perkembangan mampu mendorong perubahan sosial, ekonomi, dan budaya secara seimbang demi peningkatan kualitas hidup masyarakat secara menyeluruh. </p>
+      </div>
+    </section>
+
+    <section id="kondisi-umum">
+      <h2>Kondisi Umum Desa Wonosari</h2>
+      <div class="card-container">
+        <div class="card">
+          <h3>Geografi & Luas</h3>
+          <p>Desa Wonosari membentang seluas ±1.689 hektar di Kecamatan Pegandon, Kabupaten Kendal. Wilayahnya yang subur dengan ketinggian sekitar 45 meter di atas permukaan laut membuat sektor pertanian dan perkebunan tumbuh pesat. Dengan curah hujan rata-rata 200–400 mm per tahun, Wonosari menjadi desa yang hijau dan produktif, dikelilingi oleh hamparan ladang jagung dan sawah serta beberapa jenis kebun lainnya yang menjadi sumber penghidupan utama warga.</p>
+        </div>
+        <div class="card">
+          <h3>Populasi & Sosial</h3>
+          <p>Masyarakat Desa Wonosari hidup dalam suasana yang rukun dan penuh kekeluargaan. Semangat gotong royong masih kuat terasa di setiap kegiatan, mulai dari kerja bakti, acara keagamaan, hingga kegiatan desa bersama. Organisasi sosial seperti karang taruna, PKK, dan kelompok tani berperan aktif dalam mendukung pembangunan serta menjaga keharmonisan antarwarga. Tradisi lokal terus dijaga dan diwariskan, menjadikan kehidupan sosial di Wonosari terasa hangat, kompak, dan penuh semangat kebersamaan.</p>
+        </div>
+        <div class="card">
+          <h3>Pendidikan & Kesehatan</h3>
+          <p>Wonosari memiliki sarana pendidikan yang memadai, mulai dari PAUD, TK, SD hingga SMP, yang tersebar di beberapa dusun. Di bidang kesehatan, desa ini didukung oleh Posyandu, Polindes, dan tenaga medis seperti bidan dan kader kesehatan aktif. Semua fasilitas ini menjadi pondasi penting dalam meningkatkan mutu pendidikan dan derajat kesehatan masyarakat secara berkelanjutan.</p>
+        </div>
+        <div class="card">
+          <h3>Ekonomi & Usaha</h3>
+          <p>Sebagian besar warga menggantungkan hidup dari sektor pertanian, perkebunan, dan usaha mikro. Desa ini juga dikenal dengan berbagai produk unggulan lokal, seperti kopi robusta Wonosari, keripik singkong pedas, madu hutan alami, hingga kerajinan bambu dan batik khas desa. Pemerintah desa bersama masyarakat terus mendorong pengembangan ekonomi kreatif dan wirausaha mandiri, agar potensi lokal bisa menjadi kekuatan ekonomi desa.</p>
+        </div>
+        <div class="card">
+          <h3>Budaya & Lingkungan</h3>
+          <p>Budaya dan kearifan lokal tetap terjaga melalui kegiatan seni, pengajian, dan kerja bakti. Dikelilingi sawah dan hutan lindung, Desa Wonosari aktif menjaga kelestarian lingkungan. Inovasi baru hadir lewat ide mahasiswa KKN UNNES yang memanfaatkan sampah plastik non-organik menjadi eco-paving, memberi nilai guna sekaligus mengurangi limbah.</p>
+        </div>
+        <div class="card">
+          <h3>Pariwisata & Kreativitas</h3>
+          <p>Desa Wonosari terus berkembang sebagai kawasan wisata dan rekreasi keluarga. Saat ini telah tersedia kolam renang, area perkebunan, greenhouse pertanian, serta lapangan olahraga mini soccer yang menjadi daya tarik bagi warga dan pengunjung. Selain itu, desa juga tengah merencanakan pengembangan wisata tubing dan rafting di aliran Sungai Bodri sebagai potensi wisata alam masa depan.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section id="potensi">
+      <h2 style="font-family:'Playfair Display',serif; font-size:42px; color:#2e5c2e; margin-bottom:50px;">
+        🌿 Potensi Unggulan Desa Wonosari
+      </h2>
+      <p style="max-width:800px; margin:0 auto 60px; color:#1f3d1f; font-size:16px; line-height:1.6;">
+        Desa Wonosari memiliki kekayaan sumber daya alam, keindahan alam, dan warisan budaya yang menjadi kebanggaan masyarakat setempat.
+      </p>
+
+      <div class="potensi-row">
+        <a href="pertanian.html" class="potensi-card">
+          <img src="pertanian.png" alt="Pertanian Desa Wonosari">
+          <h3>Pertanian & Hasil Bumi</h3>
+          <p>Wonosari dikenal dengan lahan subur yang menghasilkan jagung, tembakau, dan kelengkeng unggulan hasil panen masyarakat.</p>
+        </a>
+
+        <a href="wisata.html" class="potensi-card">
+          <img src="sungai.jpg" alt="Wisata Alam Wonosari">
+          <h3>Wisata & Alam</h3>
+          <p>Keindahan alam seperti Kali Penggung dan area hijau di Wonosari menjadi tempat favorit untuk wisata dan olahraga alam terbuka.</p>
+        </a>
+
+        <a href="budaya.html" class="potensi-card">
+          <img src="kesenian.jpg" alt="Budaya Wonosari">
+          <h3>Budaya dan Tradisi</h3>
+          <p>Tradisi gotong royong, kesenian daerah, dan upacara adat menjadi wujud nyata kehidupan sosial dan budaya masyarakat Wonosari.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="mailto:unnesgiatwonosari@gmail.com"><i data-lucide="mail" class="w-6 h-6"></i>Email</a>
+      <a href="https://www.instagram.com/giat13_wonosari?igsh=eHN4eThydThpa2U3" target="_blank"><i data-lucide="instagram" class="w-6 h-6"></i>Instagram</a>
+      <a href="https://youtube.com/@wonosari_kendal?si=KpHO3topHtEARjX6" target="_blank"><i data-lucide="youtube" class="w-6 h-6"></i>YouTube</a>
+    </div>
+    <p class="text-sm text-white/90">
+        © 2025 <strong>Profil Desa Wonosari</strong>. 
+        Dibuat dengan semangat <strong class="text-green-400">Giat 13 Unnes</strong>.
+    </p>
+  </footer>
+
+
+  <script>
+    lucide.createIcons();
+    
+    // Fungsi untuk menerapkan background dengan gradient overlay dan fixed attachment
+    document.querySelectorAll('[data-bg]').forEach(section=>{
+      const img = section.dataset.bg;
+      section.style.background = `
+        linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)),
+        url('${img}') center/cover no-repeat
+      `;
+      section.style.backgroundAttachment = 'fixed';
+    });
+  </script>
+</body>
+</html>

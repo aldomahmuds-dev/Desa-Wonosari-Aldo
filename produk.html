@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produk Desa Wonosari</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* === DASAR === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #1f3d1f;
+      background-color: #f7fdf8;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    :root {
+      --green-dark: #2e5c2e;
+      --green-medium: #4baf50;
+      --green-light: #6cc96c;
+      --bg-light: #f7fdf8;
+      --header-height: 80px;
+    }
+
+     /* ==== HEADER ==== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 50px;
+      background-color: rgba(247, 253, 248, 0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: var(--header-height);
+      z-index: 50;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      position: relative;
+      text-decoration: none;
+      color: var(--green-dark);
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 2px solid var(--green-dark);
+      font-weight: 600;
+      background-color: white;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: var(--green-light);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    nav a.active {
+      background-color: var(--green-medium);
+      color: white;
+      border-color: var(--green-medium);
+      transform: scale(1.1);
+    }
+
+    /* === HERO === */
+    #hero-produk {
+      background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0)),
+                   url('latar1.png') center/cover no-repeat;
+      background-attachment: fixed;
+      color: white;
+      padding-top: calc(var(--header-height) + 70px); /* Jaga jarak dari header */
+      padding-bottom: 100px;
+      min-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    #hero-produk h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 70px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      line-height: 1;
+    }
+    #hero-produk p {
+      font-size: 1.2rem;
+      color: #eafaea;
+      max-width: 700px;
+    }
+
+    /* === PRODUK SECTION === */
+    .produk-section {
+      position: relative;
+      padding: 80px 40px; 
+      background-color: #f8fff9;
+      overflow: hidden;
+      z-index: 1;
+      flex-grow: 1; /* Agar menempati ruang sisa sebelum footer */
+    }
+
+    .produk-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("https://www.transparenttextures.com/patterns/arabesque.png") repeat;
+      background-size: 250px;
+      background-attachment: fixed;
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .produk-section h2, .produk-section p.sub, .produk-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .produk-section h2 {
+      font-size: 50px;
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      color: var(--green-dark);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .produk-section p.sub {
+      text-align: center;
+      color: #333;
+      font-size: 17px;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    /* PRODUK CARD (Global) */
+    .produk-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .produk-card {
+      width: 100%;
+      background: linear-gradient(to bottom, #ffffff, #f2fff5);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .produk-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    /* PRODUK CARD TIPE 1 (Eco Paving, Pupuk, Kacang) */
+    .produk-card.type-1 {
+      display: flex;
+      flex-direction: row;
+      background: linear-gradient(to right, #ffffff, #f3fff4);
+    }
+
+    .produk-card.type-1 img {
+      width: 45%;
+      height: 550px;
+      min-height: 300px;
+      object-fit: cover;
+    }
+
+    .produk-card.type-1 .produk-info {
+      width: 55%;
+      padding: 40px 50px;
+      text-align: justify;
+    }
+/* PRODUK CARD TIPE 3 (Eco Paving, Pupuk, Kacang) */
+    .produk-card.type-1 {
+      display: flex;
+      flex-direction: row;
+      background: linear-gradient(to right, #ffffff, #f3fff4);
+    }
+
+    .produk-card.type-3 img {
+      width: 45%;
+      height: 550px;
+      min-height: 300px;
+      object-fit: cover;
+    }
+
+    .produk-card.type-3 .produk-info {
+      width: 55%;
+      padding: 40px 50px;
+      text-align: justify;
+    }
+
+
+
+    /* Urutan Bergantian (Perbaikan utama) */
+    /* Membuat card kedua dan seterusnya memiliki urutan terbalik di desktop */
+    .produk-container .produk-card:nth-child(even).type-1 {
+        flex-direction: row-reverse;
+    }
+
+    .produk-container .produk-card:nth-child(even).type-1 img {
+        /* tidak perlu diubah, tetap 45% */
+    }
+
+    .produk-card.type-1 .produk-info h3 {
+      font-size: 30px;
+      margin-bottom: 15px;
+      color: var(--green-dark);
+      font-family: "Playfair Display", serif;
+      text-align: left;
+    }
+
+    .produk-info p {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    /* === FOOTER === */
+    .footer-infografis {
+      background: linear-gradient(to right, #1e3a8a, #065f46);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .footer-infografis .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 17px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-infografis .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .footer-infografis a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .footer-infografis a:hover {
+      color: #a7f3d0;
+      transform: translateY(-3px);
+    }
+
+    .footer-infografis .divider {
+      width: 80%;
+      max-width: 900px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.25);
+      margin: 10px auto;
+    }
+
+    .text-green-400 { color: #4ade80; font-weight: bold; }
+
+    /* ======================================= */
+    /* ====== MEDIA QUERIES UNTUK RESPONSIVE ====== */
+    /* ======================================= */
+
+    /* --- LAYAR TABLET (<= 900px) --- */
+ @media (max-width: 1024px) {
+        header {
+            padding: 10px 20px;
+            height: 70px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav a {
+            padding: 5px 10px;
+            font-size: 0.85rem;
+        }
+
+      /* HERO */
+      #hero-produk h1 { font-size: 50px; }
+      #hero-produk p { font-size: 1rem; }
+
+      /* PRODUK SECTION */
+      .produk-section h2 { font-size: 40px; margin-bottom: 30px; }
+      .produk-section p.sub { font-size: 16px; margin-bottom: 40px; }
+
+      /* PRODUK CARD TIPE 1 (Stack Vertical) */
+      .produk-card.type-1,
+      .produk-container .produk-card:nth-child(even).type-1 {
+        flex-direction: column; /* Ubah menjadi kolom */
+      }
+      
+      .produk-card.type-1 img {
+        width: 100%;
+        height: 200px;
+        min-height: 150px;
+        object-fit: cover;
+      }
+
+      .produk-card.type-1 .produk-info {
+        width: 100%;
+        padding: 25px;
+        text-align: center;
+      }
+
+      .produk-card.type-1 .produk-info h3 {
+        text-align: center; /* Rata tengah di HP */
+        font-size: 24px;
+      }
+      .produk-info p {
+        text-align: justify; /* Pertahankan justifikasi untuk body text */
+      }
+    }
+    
+   
+    /* --- LAYAR MOBILE (<= 768px) --- */
+    @media (max-width: 768px) {
+        /* HEADER (stack) */
+        header {
+            padding: 10px 10px;
+            height: auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 10px;
+            gap: 5px;
+        }
+        
+        .logo img {
+            height: 35px;
+        }
+
+        nav {
+            width: 100%;
+            justify-content: space-around;
+            gap: 5px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        nav a {
+            font-size: 0.75rem;
+            padding: 5px 8px;
+            flex-shrink: 0;
+            border-width: 1px;
+            transform: none; /* Hilangkan scaling pada HP */
+        }
+        .produk-card.type-1 img {
+    width: 100%;
+    height: 480px;         /* 🟢 Atur tinggi foto */
+    object-fit: cover;     /* 🟢 Agar tidak gepeng */
+    border-radius: 10px;   /* 🟢 Opsional: bikin lebih estetik */
+    margin-top: 10px;      /* 🟢 Jarak agar tidak terlalu mepet */
+}
+
+        
+        
+        /* HERO */
+        #hero-produk h1 {
+            font-size: 36px;
+        }
+        #hero-produk p {
+            font-size: 0.9rem;
+        }
+
+        /* PRODUK */
+        .produk-section {
+            padding: 50px 20px;
+        }
+        .produk-section h2 {
+            font-size: 32px;
+        }
+        
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logounnes.png" alt="UNNES">
+      <img src="logokkn.png" alt="KKN">
+      <img src="logokemdikbud.png" alt="Kemendikbud">
+      <img src="loggowonosari.png" alt="Desa Wonosari">
+    </div>
+    <nav>
+      <a href="index.html">BERANDA</a>
+      <a href="profil.html">PROFIL</a>
+      <a href="produk.html" class="active">PRODUK</a>
+      <a href="infografis.html">INFOGRAFIS</a>
+
+  </header>
+
+  <section id="hero-produk">
+    <h1>PRODUK DESA<br>WONOSARI</h1>
+    <p>Menampilkan hasil karya terbaik masyarakat Desa Wonosari — dari UMKM hingga kelompok kreatif lokal.</p>
+  </section>
+
+  <section class="produk-section">
+    <h2>Produk Unggulan Masyarakat</h2>
+    <p class="sub">Berikut beberapa produk unggulan yang dihasilkan oleh warga Desa Wonosari. Semua dibuat dengan semangat kemandirian dan cinta lingkungan.</p>
+
+    <div class="produk-container">
+      
+      <div class="produk-card type-1">
+        <img src="PRODUK PAVING.jpg" alt="Eco Paving Desa Wonosari">
+        <div class="produk-info">
+          <h3>Eco Paving</h3>
+          <p>
+            Produk <strong>Eco Paving</strong> merupakan inovasi ramah lingkungan yang dihasilkan dari 
+      <strong>limbah plastik rumah tangga</strong> oleh masyarakat Desa Wonosari, Kecamatan Pegandon, Kabupaten Kendal.
+      Gagasan awal pembuatan Eco Paving ini dicetuskan oleh mahasiswa KKN Giat 13 Universitas Negeri Semarang (UNNES), 
+      sebagai bentuk kepedulian terhadap permasalahan sampah plastik di lingkungan desa.
+      <br><br>
+      Melalui proses daur ulang kreatif, limbah plastik diolah menjadi paving block berkualitas yang kuat, estetis, 
+      dan memiliki nilai jual tinggi. Inovasi ini tidak hanya mengurangi tumpukan sampah, tetapi juga membuka peluang 
+      ekonomi baru bagi warga desa.
+      <br><br>
+      Kini, program Eco Paving tengah dikembangkan menjadi program desa berkelanjutan — sebuah langkah nyata menuju 
+      Wonosari yang bersih, mandiri, dan bernilai lingkungan.
+          </p>
+        </div>
+      </div>
+
+    <div class="produk-card type-1">
+      <img src="PRODUK PUPUK CAIR.jpg" alt="Pupuk Cair Desa Wonosari">
+      <div class="produk-info">
+        <h3>Pupuk Cair Organik</h3>
+        <p>
+       Produk <strong>Pupuk Cair Organik</strong> ini dihasilkan dari olahan 
+        <strong>limbah organik rumah tangga</strong> yang dikumpulkan masyarakat Desa Wonosari.
+        Melalui tangan kreatif kelompok <strong>POKDARWIS</strong>, limbah organik tersebut diolah 
+        menjadi berbagai jenis pupuk cair yang memiliki fungsi berbeda sesuai kebutuhan tanaman.
+        <br><br>
+        Proses pengolahannya dilakukan secara alami dan ramah lingkungan, menghasilkan pupuk cair 
+        berkualitas tinggi yang mampu menyuburkan tanah, meningkatkan pertumbuhan tanaman, serta 
+        mendukung pertanian berkelanjutan.
+        <br><br>
+        Inovasi ini tidak hanya membantu mengurangi limbah organik desa, tetapi juga memberikan 
+        manfaat ekonomi dan lingkungan bagi masyarakat setempat.
+
+        </p>
+      </div>
+    </div>
+
+
+    <div class="produk-card type-1">
+      <img src="PRODUK KACANG.jpg" alt="Kacang Sangrai Desa Wonosari">
+      <div class="produk-info">
+        <h3>Kacang Sangrai</h3>
+        <p>
+        Produk <strong>Kacang Sangrai Desa Wonosari</strong> merupakan hasil olahan unggulan dari para pelaku UMKM lokal yang mengandalkan cita rasa tradisional khas pedesaan. 
+Dibuat dengan bahan kacang pilihan berkualitas, kacang ini diproses melalui metode <em>sangrai alami tanpa minyak</em>, menghasilkan aroma harum, rasa gurih yang renyah, serta lebih sehat untuk dikonsumsi.
+<br><br>
+Proses pembuatannya masih dilakukan secara tradisional menggunakan wajan tanah liat dan pasir khusus sangrai, menjaga keaslian rasa dan tekstur yang khas. 
+Selain menjadi camilan favorit masyarakat, <strong>Kacang Sangrai Wonosari</strong> juga menjadi oleh-oleh khas bagi para pengunjung desa.
+<br><br>
+Inovasi ini menjadi bukti semangat UMKM Desa Wonosari dalam mengembangkan potensi lokal, memperkuat ekonomi masyarakat, 
+dan melestarikan cita rasa tradisional yang semakin langka di era modern.
+
+        </p>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+  <footer class="footer-infografis">
+    <div class="footer-container">
+      <div class="social-links">
+        <a href="mailto:unnesgiatwonosari@gmail.com"><i data-lucide="mail" class="w-6 h-6"></i><span>Email</span></a>
+        <a href="https://www.instagram.com/giat13_wonosari?igsh=eHN4eThydThpa2U3" target="_blank"><i data-lucide="instagram" class="w-6 h-6"></i><span>Instagram</span></a>
+        <a href="https://youtube.com/@wonosari_kendal" target="_blank"><i data-lucide="youtube" class="w-6 h-6"></i><span>YouTube</span></a>
+      </div>
+
+      <div class="divider"></div>
+
+      <p>© 2025 <strong>Profil Desa Wonosari</strong>. Dibuat dengan semangat <strong class="text-green-400">Giat 13 Unnes</strong>.</p>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
